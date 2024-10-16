@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date with Me?</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fce4ec;
+      text-align: center;
+      padding: 20px;
+    }
+    .question {
+      font-size: 24px;
+      color: #ff4081;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .character {
+      margin: 20px auto;
+      width: 80%;
+      max-width: 350px;
+      height: auto;
+    }
+    .button {
+      font-size: 18px;
+      padding: 10px;
+      background-color: #ff80ab;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin: 10px 0;
+      border-radius: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+      width: 90%;
+      max-width: 300px;
+    }
+    .button:hover {
+      background-color: #ff4081;
+      transform: scale(1.05);
+    }
+    .response {
+      font-size: 20px;
+      color: #ff4081;
+      margin-top: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+    .food-option {
+      display: inline-block;
+      margin: 10px;
+      text-align: center;
+    }
+    .food-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .food-image:hover {
+      transform: scale(1.1);
+    }
+    .slider {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 300px;
+      -webkit-appearance: none;
+      height: 8px;
+      background: #ff80ab;
+      border-radius: 10px;
+      outline: none;
+      transition: background 0.3s;
+    }
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #ff4081;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #ff4081;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .rating-effect {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      font-size: 30px;
+      animation: heart-effect 2s infinite;
+    }
+    @keyframes heart-effect {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-20px); opacity: 0.7; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .percentage {
+      font-size: 20px;
+      color: #ff4081;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Step 1 -->
+  <div id="step1">
+    <div class="question">Would you like to go out with me for a date?</div>
+    <img class="character" src="https://i.pinimg.com/originals/39/21/17/3921175c0f460ed12e09b41bc54a18b5.gif" width="200"> 
+    <div>
+      <button class="button" onclick="chooseYes()">Yes</button>
+      <button class="button" onclick="chooseNo()">No</button>
+    </div>
+  </div>
+
+  <!-- Step 2 (Yes) -->
+  <div id="yesResponse" class="hidden">
+    <div class="response">Yay! Let's go this weekend!</div>
+    <div class="question">When are you free?</div>
+    <input type="date" id="date" class="button">
+    <input type="time" id="time" class="button">
+    <button class="button" onclick="chooseFood()">Next</button>
+  </div>
+
+  <!-- Step 2 (No) -->
+  <div id="noResponse" class="hidden">
+    <div class="response">Aww Hikhik, that's okay! I'll wait until you're free!</div>
+    <img class="gif" src="https://i.pinimg.com/originals/24/df/8f/24df8f06ef80295ddb1ea73ed72c3138.gif" width="200">
+  </div>
+
+  <!-- Step 3 (Choose food) -->
+  <div id="foodChoice" class="hidden">
+    <div class="question">What do you want to eat?</div>
+    <div class="food-option">
+      <img class="food-image" src="https://png.pngtree.com/png-clipart/20230417/original/pngtree-gourmet-pizza-cartoon-png-image_9061095.png" alt="Pizza" onclick="rateExcitement('Pizza')">
+      <div>Pizza 🍕</div>
+    </div>
+    <div class="food-option">
+      <img class="food-image" src="https://png.pngtree.com/png-clipart/20230216/ourmid/pngtree-juicy-burgers-with-a-transparent-background-png-image_6603069.png" alt="Hamburger" onclick="rateExcitement('Hamburger')">
+      <div>Hamburger 🍔</div>
+    </div>
+    <div class="food-option">
+      <img class="food-image" src="https://cdn.pixabay.com/photo/2023/07/20/16/27/pho-8139790_1280.jpg" alt="Noodle Soup" onclick="rateExcitement('Noodle Soup')">
+      <div>Noodle Soup 🍜</div>
+    </div>
+    <div class="food-option">
+      <img class="food-image" src="https://img.lovepik.com/element/40144/8827.png_1200.png" alt="Prohit" onclick="rateExcitement('Prohit')">
+      <div>Buffet 🍽️</div>
+    </div>
+    <div class="food-option">
+      <img class="food-image" src="https://static.vecteezy.com/system/resources/thumbnails/036/409/436/small_2x/ai-generated-savoring-korean-bbq-png.png" alt="BBQ" onclick="rateExcitement('BBQ')">
+      <div>BBQ 🥩</div>
+    </div>
+  </div>
+
+  <!-- Step 4 (Rate excitement) -->
+  <div id="excitementRating" class="hidden">
+    <div class="question">How excited are you?</div>
+    <div class="rating-effect">
+      <input type="range" id="rating" class="slider" min="0" max="100" value="50" oninput="showHearts(); updatePercentage()">
+      <div class="percentage" id="percentageDisplay">50%</div>
+      <div id="heartContainer"></div>
+    </div>
+    <button class="button" onclick="showGif()">Show Me!</button>
+  </div>
+
+  <!-- Step 5 (Show gif and final message) -->
+  <div id="finalMessage" class="hidden">
+    <div class="response" id="finalText"></div>
+    <img id="gif" src="" alt="Cute GIF" style="width: 250px; margin-top: 20px;">
+  </div>
+
+  <script>
+    let selectedDate, selectedTime;
+
+    function chooseYes() {
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('yesResponse').classList.remove('hidden');
+    }
+
+    function chooseNo() {
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('noResponse').classList.remove('hidden');
+    }
+
+    function chooseFood() {
+      selectedDate = document.getElementById('date').value;
+      selectedTime = document.getElementById('time').value;
+      document.getElementById('yesResponse').classList.add('hidden');
+      document.getElementById('foodChoice').classList.remove('hidden');
+    }
+
+    function rateExcitement(food) {
+      alert(`Yum! ${food} sounds great!`);
+      document.getElementById('foodChoice').classList.add('hidden');
+      document.getElementById('excitementRating').classList.remove('hidden');
+    }
+
+    function showHearts() {
+      const heartContainer = document.getElementById('heartContainer');
+      heartContainer.innerHTML = ''; // Clear previous hearts
+      const rating = document.getElementById('rating').value;
+
+      // Create hearts based on the rating
+      for (let i = 0; i < rating / 10; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.animationDuration = `${Math.random() + 1}s`; // Random duration for animation
+        heartContainer.appendChild(heart);
+      }
+    }
+
+    function updatePercentage() {
+      const rating = document.getElementById('rating').value;
+      document.getElementById('percentageDisplay').innerText = `${rating}%`;
+    }
+
+    function showGif() {
+      document.getElementById('excitementRating').classList.add('hidden');
+      document.getElementById('finalMessage').classList.remove('hidden');
+
+      // Set the final message with selected date and time
+      document.getElementById('finalText').innerHTML = `See you soon on ${selectedDate} at ${selectedTime}! 💖`;
+
+      // Set the default GIF
+      const gifUrl = 'https://media.giphy.com/media/26gssIytJvy1b1THO/giphy.gif';
+      document.getElementById('gif').src = gifUrl; 
+    }
+  </script>
+</body>
+</html>
